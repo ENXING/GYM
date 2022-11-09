@@ -3,7 +3,7 @@ const app = express();
 
 app.get('/server', (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
-    response.send('HELLO AJAX - 2');
+    response.send('HELLO AJAX - 2 express');
 });
 
 var mongoose = require("mongoose");
