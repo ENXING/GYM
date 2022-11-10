@@ -1,22 +1,34 @@
-const { response } = require('express');
+const bodyParser = require('body-parser')
+
 const express = require('express');
 
 const app = express();
+
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+
+app.all('/json-workout', urlencodedParser, (request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    let str = JSON.stringify(request.body);
+	console.log(str)
+	str = JSON.stringify("getit")
+	response.send(str)
+});
 
 app.all('/jsonp-server', (request, response)=>{
 	response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
 	let x =[] 
-	for (let i = 0; i < 1000; i++) x.push(i)
+	for (let i = 0; i < 100; i++) x.push(i)
 	function between(min, max) {
 		return Math.floor(Math.random() * (max-min) + min)
 	}
 	let data = x.map((key)=> Math.random(10,10 + key))
 
 	let str = JSON.stringify(data)
-	// console.log(str)
 	response.send(str);
-	// response.send("xxxxx")
 });
 app.get('/server', (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');

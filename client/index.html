@@ -18,7 +18,7 @@
         <div class="div-center  opacity-75">
             <form class="text-center">
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Exercise</label>
+                    <label for="exampleFormControlSelect1">Workout</label>
                     <select class="form-control" id="exercise" style="text-align-last:center;">
                         <option>Chest Press</option>
                         <option>Low Row</option>
@@ -31,11 +31,11 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="typeNumber">Pounds</label>
-                    <input type="number" id="pounds" class="form-control" />
+                    <input type="number" id="pounds" class="form-control" value='45' />
                 </div>
                 <div class="form-group>
                 <label class=" form-label" for="typeNumber">Repeat</label>
-                    <input type="number" id="repeat" class="form-control" />
+                    <input type="number" id="repeat" class="form-control" value='3'/>
                 </div>
                 <button id="submit" type="submit" class="btn btn-primary" style="margin: 10px;">Submit</button>
             </form>
@@ -46,77 +46,57 @@
         $('#submit').click(function(e){
             e.preventDefault();
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://43.226.26.53:10201/jsonp-server?a=100&b=200&c=300');
-            xhr.send();
+            // xhr.open('GET', 'http://43.226.26.53:10201/jsonp-server?a=100&b=200&c=300');
+            // xhr.open('POST', 'http://43.226.26.53:10201/json-workout');
+            let url = 'http://127.0.0.1:10201/json-workout'
+            xhr.open('POST', url, true);
+            // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            let pounds =$('#pounds').val()
+            let repeat = $('#repeat').val()
+            console.log(typeof pounds)
+            if (!(!isNaN(pounds) && Number(pounds) > 0 && !isNaN(repeat) && Number(repeat) > 0 && Number.isInteger(Number(repeat)))) {
+                alert("Wrong input")
+                return
+            }
+            // xhr.send('a=100&b=200&c=300');
+            // xhr.send(JSON.stringify({"pounds": pounds, "repeat": repeat}))
+            var obj = {"pounds": pounds, "repeat": repeat};
+
+            function json2url(obj) {
+                var ret = ''; 
+                for (let key in obj) {
+                    ret += key + '=' + obj[key] + '&'
+                }
+                return ret.slice(0, -1);
+            }
+            xhr.send(json2url(obj))
+            console.log(json2url(obj))
+            xhr.onerror = function (e) {
+                alert(" ERROR FETCHING " + url);
+            };
             xhr.onreadystatechange = function(){
                 if(xhr.readyState === 4){
                     if(xhr.status >= 200 && xhr.status < 300){
                         let data = JSON.parse(xhr.response);
-                        let x = []
-                        for (let i = 0; i < data.length; ++i) {
-                            x.push(i);
-                        }
-                        TESTER = document.getElementById('tester');
-                        Plotly.newPlot(TESTER, [{
-                            'x': x,
-                            'y': data 
-                        }], {
-                            margin: { t: 0 }
-                        });
+                        alert(data);
+                        // let x = []
+                        // for (let i = 0; i < data.length; ++i) {
+                        //     x.push(i);
+                        // }
+                        // TESTER = document.getElementById('tester');
+                        // Plotly.newPlot(TESTER, [{
+                        //     'x': x,
+                        //     'y': data 
+                        // }], {
+                        //     margin: { t: 0 }
+                        // });
                         // $('#inputdata').css("display", "none")
                         // $('#submit').css("display", "block")
                     }
                 }
             }
         })
-
-        // const result = document.getElementById("result");
-        // btn.onclick = function(){
-        //     const xhr = new XMLHttpRequest();
-        //     // xhr.responseType = 'json';
-        //     // xhr.open('GET', 'http://127.0.0.1:10201/jsonp-server?a=100&b=200&c=300');
-        //     xhr.open('GET', 'http://43.226.26.53:10201/jsonp-server?a=100&b=200&c=300');
-        //     xhr.send();
-        //     xhr.onreadystatechange = function(){
-        //         if(xhr.readyState === 4){
-        //             if(xhr.status >= 200 && xhr.status < 300){
-        //                 let data = JSON.parse(xhr.response);
-        //                 // console.log(data);
-        //                 // result.innerHTML = data.toString();
-        //                 let x = []
-        //                 for (let i = 0; i < data.length; ++i) {
-        //                     x.push(i);
-        //                 }
-        //                 TESTER = document.getElementById('tester');
-        //                 Plotly.newPlot(TESTER, [{
-        //                     'x': x,
-        //                     'y': data 
-        //                 }], {
-        //                     margin: { t: 0 }
-        //                 });
-        //             }
-        //         }
-        //     }
-            // xhr.open('GET', 'http://43.226.26.53:10201/server?a=100&b=200&c=300');
-            // xhr.send();
-            // xhr.onreadystatechange = function(){
-            //     if(xhr.readyState === 4){
-            //         //判断响应状态码 200  404  403 401 500
-            //         // 2xx 成功
-            //         if(xhr.status >= 200 && xhr.status < 300){
-            //             //处理结果  行 头 空行 体
-            //             //响应 
-            //             // console.log(xhr.status);//状态码
-            //             // console.log(xhr.statusText);//状态字符串
-            //             // console.log(xhr.getAllResponseHeaders());//所有响应头
-            //             // console.log(xhr.response);//响应体
-            //             //设置 result 的文本
-            //             result.innerHTML = xhr.response;
-            //         }else{
-
-            //         }
-            //     }
-            // }
     </script>
 </body>
 </html>
