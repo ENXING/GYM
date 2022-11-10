@@ -14,7 +14,7 @@ app.all('/jsonp-server', (request, response)=>{
 	let data = x.map((key)=> Math.random(10,10 + key))
 
 	let str = JSON.stringify(data)
-	console.log(str)
+	// console.log(str)
 	response.send(str);
 	// response.send("xxxxx")
 });
