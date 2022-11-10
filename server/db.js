@@ -12,9 +12,8 @@ app.all('/json-workout', urlencodedParser, (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
     let str = JSON.stringify(request.body);
+	response.send(request.body)
 	console.log(str)
-	str = JSON.stringify("getit")
-	response.send(str)
 });
 
 app.all('/jsonp-server', (request, response)=>{

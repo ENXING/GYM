@@ -71,7 +71,7 @@
                 return ret.slice(0, -1);
             }
             xhr.send(json2url(obj))
-            console.log(json2url(obj))
+            console.log("Send:> " + json2url(obj))
             xhr.onerror = function (e) {
                 alert(" ERROR FETCHING " + url);
             };
@@ -79,7 +79,8 @@
                 if(xhr.readyState === 4){
                     if(xhr.status >= 200 && xhr.status < 300){
                         let data = JSON.parse(xhr.response);
-                        alert(data);
+                        console.log(data);
+                        alert(JSON.stringify(data));
                         // let x = []
                         // for (let i = 0; i < data.length; ++i) {
                         //     x.push(i);
