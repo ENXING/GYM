@@ -1,19 +1,41 @@
+var mongoose = require("mongoose");
+
+var exercise = require("./exercise")
+mongoose.connect("mongodb://127.0.0.1/exercise", ()=>{
+	console.log("connected>>>>>>>>>>>>")
+}, e=>console.error(e));
+
+async function run(obj) {
+	
+	try{
+		// insert
+		// let actionName = exercise..create({name: obj.exercise, url: 'http://baidu.com'})
+		let record = {exercise: {name: obj.exercise}, weight: Number(obj.weight), repeat: Number(obj.repeat)}
+		console.log(record)
+		const actionName = new exercise.Workout(record)
+		await actionName.save()
+
+		console.log(actionName)
+		// const workout = new exercise.Workout({exercise: new exercise.ActionName({name: "pull up"}), })
+	} catch(e) {
+		console.log(e.message)
+	}
+}
+
+
 const bodyParser = require('body-parser')
-
 const express = require('express');
-
 const app = express();
 
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-
 app.all('/json-workout', urlencodedParser, (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
     let str = JSON.stringify(request.body);
+	run(request.body)
 	response.send(request.body)
-	console.log(str)
 });
 
 app.all('/jsonp-server', (request, response)=>{
@@ -29,24 +51,11 @@ app.all('/jsonp-server', (request, response)=>{
 	let str = JSON.stringify(data)
 	response.send(str);
 });
+
 app.get('/server', (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.send('HELLO AJAX - 2 express');
 });
-
-var mongoose = require("mongoose");
-
-mongoose.connect("mongodb://127.0.0.1/test");
-
-mongoose.connection.once("open",function(){
-	console.log("数据库连接成功~~~");
-});
-
-mongoose.connection.once("close",function(){
-	console.log("数据库连接已经断开~~~");
-});
-
-mongoose.disconnect();
 
 app.listen(10201, () => {
     console.log("hhh");
