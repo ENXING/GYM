@@ -75,18 +75,20 @@
     <script>
         let present = $('#inputdata')
         $('#history_data').click(e=>{
-            present.hide()
-            present = $('#history_form')
-            getHistory()
-            present.show()
+            if(!event.detail || event.detail == 1){
+                present.hide()
+                present = $('#history_form')
+                getHistory()
+                present.show()
+            }
         });
         $('#record').click(e=>{
             present.hide()
             present = $('#inputdata')
             present.show()
         });
-        // var ip = '43.226.26.53'
-        var ip = 'localhost'
+        var ip = '43.226.26.53'
+        // var ip = 'localhost'
     </script>
 </body>
 </html>
