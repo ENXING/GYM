@@ -21,7 +21,7 @@ function clickDelete() {
 }
 
 
-function getHistory() {
+function getHistory(resovle, reject) {
     $('#exercieseTable>tbody').children().remove()
     const xhr = new XMLHttpRequest();
     // xhr.open('GET', 'http://43.226.26.53:10201/get-history');
@@ -44,6 +44,7 @@ function getHistory() {
                     .appendTo('#exercieseTable>tbody')
                     console.log(new Date(data[i].created))
                 }
+                resovle("200 ok")
             }
         }
     } 

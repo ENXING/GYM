@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workout Record</title>
+    <link rel="icon" href="./icon/icon.webp" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="./css/submit.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="./js/historyData.js" defer></script>
     <script type="text/javascript" src="./js/submit.js" defer></script>
     <script type="text/javascript" src="./js/graph.js" defer></script>
+    <script type="text/javascript" src="./js/control.js" defer></script>
 
+    <title>Workout Record</title>
     <nav class="navbar navbar-light bg-light">
         <form class="form-inline">
           <button class="btn" id="record" type="button">Record</button>
@@ -42,7 +45,7 @@
               </table>
         </div>
         <div id="graph_form" style="display: none;">
-            <div id="tester"></div>
+            <canvas id="myChart"></canvas>
         </div>
         <div class="div-center  opacity-75" id="inputdata">
             <form class="text-center">
@@ -71,24 +74,5 @@
         </div>
     </div>
 
-
-    <script>
-        let present = $('#inputdata')
-        $('#history_data').click(e=>{
-            if(!event.detail || event.detail == 1){
-                present.hide()
-                present = $('#history_form')
-                getHistory()
-                present.show()
-            }
-        });
-        $('#record').click(e=>{
-            present.hide()
-            present = $('#inputdata')
-            present.show()
-        });
-        var ip = '43.226.26.53'
-        // var ip = 'localhost'
-    </script>
 </body>
 </html>
