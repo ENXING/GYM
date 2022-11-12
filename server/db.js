@@ -27,12 +27,27 @@ async function getHistory() {
 	return await exercise.Workout.find(filter).lean();
 }
 
+async function delRecord(id) {
+	let filter = {_id: id};
+	return await exercise.Workout.deleteOne(filter);
+}
 const bodyParser = require('body-parser')
 const express = require('express');
 const app = express();
 
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+app.all('/del-item', urlencodedParser, (request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+    let str = JSON.stringify(request.body);
+	delRecord(request.body.id).then((e)=>{
+		response.send(request.body)
+	}, (e)=>{
+		response.send(e)
+	})
+});
 
 app.all('/json-workout', urlencodedParser, (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
@@ -48,7 +63,6 @@ app.all('/get-history', (request, response)=>{
     response.setHeader('Access-Control-Allow-Headers', '*');
 
 	getHistory().then((e)=>{
-		console.log(e)
 		console.log(JSON.stringify(e))
 		response.send(JSON.stringify(e));
 	}, (e)=>{

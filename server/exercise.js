@@ -27,7 +27,12 @@ const workoutSchema = new mongoose.Schema({
         immutable: true, 
         type: Date,
         default: ()=>Date.now()
+    },
+    deleted: {
+        type: Boolean,
+        default: false 
     }
+
 })
 module.exports = {
     Workout: mongoose.model("Workout", workoutSchema),
