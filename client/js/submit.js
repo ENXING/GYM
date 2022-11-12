@@ -1,7 +1,7 @@
 $('#submit').click(function(e){
     e.preventDefault();
     const xhr = new XMLHttpRequest();
-    let url = 'http://' + ip + ':10201/json-workout'
+    let url = 'http://' + ip + ':10201/put-workout'
     xhr.open('POST', url, true);
     // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

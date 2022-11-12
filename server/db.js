@@ -23,13 +23,13 @@ async function run(obj) {
 }
 
 async function getHistory() {
-	let filter = {};
+	let filter = {deleted: false};
 	return await exercise.Workout.find(filter).lean();
 }
 
 async function delRecord(id) {
 	let filter = {_id: id};
-	return await exercise.Workout.deleteOne(filter);
+	return await exercise.Workout.updateOne(filter, {deleted: true});
 }
 const bodyParser = require('body-parser')
 const express = require('express');
@@ -38,7 +38,7 @@ const app = express();
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.all('/del-item', urlencodedParser, (request, response) => {
+app.post('/del-item', urlencodedParser, (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
     let str = JSON.stringify(request.body);
@@ -49,7 +49,7 @@ app.all('/del-item', urlencodedParser, (request, response) => {
 	})
 });
 
-app.all('/json-workout', urlencodedParser, (request, response) => {
+app.post('/put-workout', urlencodedParser, (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
     let str = JSON.stringify(request.body);
@@ -58,7 +58,7 @@ app.all('/json-workout', urlencodedParser, (request, response) => {
 });
 
 
-app.all('/get-history', (request, response)=>{
+app.get('/get-history', (request, response)=>{
 	response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
 
