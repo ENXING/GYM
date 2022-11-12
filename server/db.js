@@ -46,8 +46,6 @@ app.all('/json-workout', urlencodedParser, (request, response) => {
 app.all('/get-history', (request, response)=>{
 	response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
-
-	
 	getHistory().then((e)=>{
 		console.log(e)
 		console.log(JSON.stringify(e))

@@ -11,7 +11,8 @@ function clickDelete() {
 
 function getHistory() {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://43.226.26.53:10201/get_history');
+    // xhr.open('GET', 'http://43.226.26.53:10201/get_history');
+    xhr.open('GET', 'http://workoutreport.ga:10201/get_history');
     // xhr.open('GET', 'http://localhost:10201/get-history');
     xhr.send()
     xhr.onreadystatechange = function(){
