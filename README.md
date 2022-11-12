@@ -10,6 +10,12 @@
 * mongodump
 * mongorestore --db exercise ./dump/exercise
 
+## nodemon
+* screen -ls
+* screen -S myname
+* screen -S myname -X quit
+* screen -r myname
+* ctrl+a d: detach
 
 # Mongodb
 * db.workouts.update({}, {$set:{"deleted":false}}, false, true)
