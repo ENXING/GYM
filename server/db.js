@@ -43,16 +43,15 @@ app.all('/json-workout', urlencodedParser, (request, response) => {
 });
 
 
-app.get('/get-history', (request, response)=>{
+app.all('/get-history', (request, response)=>{
 	response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
-	response.header('Access-Control-Allow-Origin', '*');
-	response.header('Access-Control-Allow-Headers', '*');
 	getHistory().then((e)=>{
 		console.log(e)
 		console.log(JSON.stringify(e))
 		response.send(JSON.stringify(e));
 	}, (e)=>{
+		response.send({})
 		console.log("error query find in mongo")
 	})
 });
