@@ -22,6 +22,10 @@ async function run(obj) {
 	}
 }
 
+async function getHistory() {
+	let filter = {};
+	return await exercise.Workout.find(filter).lean();
+}
 
 const bodyParser = require('body-parser')
 const express = require('express');
@@ -37,6 +41,22 @@ app.all('/json-workout', urlencodedParser, (request, response) => {
 	run(request.body)
 	response.send(request.body)
 });
+
+
+app.all('/get-history', (request, response)=>{
+	response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Headers', '*');
+
+	
+	getHistory().then((e)=>{
+		console.log(e)
+		console.log(JSON.stringify(e))
+		response.send(JSON.stringify(e));
+	}, (e)=>{
+		console.log("error query find in mongo")
+	})
+});
+
 
 app.all('/jsonp-server', (request, response)=>{
 	response.setHeader('Access-Control-Allow-Origin', '*');
