@@ -1,5 +1,7 @@
 $('#submit').click(function(e){
     e.preventDefault();
+    let workout_name = $('#workout_name :selected').text()
+    if (!confirm('Confirm ' + workout_name + '?')) return;
     const xhr = new XMLHttpRequest();
     let url = 'http://' + ip + ':10201/put-workout'
     xhr.open('POST', url, true);
@@ -7,8 +9,6 @@ $('#submit').click(function(e){
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     let pounds =$('#pounds').val()
     let repeat = $('#repeat').val()
-    let workout_name = $('#workout_name :selected').text()
-    alert(workout_name)
     console.log(typeof pounds)
     if (!(!isNaN(pounds) && Number(pounds) > 0 && !isNaN(repeat) && Number(repeat) > 0 && Number.isInteger(Number(repeat)))) {
         alert("Wrong input")

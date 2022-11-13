@@ -20,18 +20,23 @@ function showGraph(startDay) {
         name2color[name] = colors[count]; count++;
       }
       let date = new Date(items[i].created).toLocaleDateString("en-US");
-      if (record[name] !== undefined && date in record[name]) {
+      if (record[name] === undefined) record[name] = {}
+      if (date in record[name]) {
         record[name][date].push({
           weight: items[i].weight,
           repeat: items[i].repeat
         })
       } else {
-        record[name] = {
-          [new Date(items[i].created).toLocaleDateString("en-US")]: [{
+        record[name][new Date(items[i].created).toLocaleDateString("en-US")] = [{
           weight: items[i].weight,
           repeat: items[i].repeat
-          }]
-        }
+        }]
+        // record[name] = {
+        //   [new Date(items[i].created).toLocaleDateString("en-US")]: [{
+        //   weight: items[i].weight,
+        //   repeat: items[i].repeat
+        //   }]
+        // }
       }
       // let item = {label: name, backgroundColor: color, borderColor: color, data}
       console.log(new Date(items[i].created))
