@@ -19,3 +19,4 @@
 
 # Mongodb
 * db.workouts.update({}, {$set:{"deleted":false}}, false, true)
+* db.workouts.deleteMany({deleted:true});
