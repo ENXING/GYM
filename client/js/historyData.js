@@ -38,7 +38,7 @@ function printHistory(resovle, reject) {
     $('#exercieseTable>tbody').children().remove()
     let p = new Promise(getAll)
     p.then((data)=>{
-        for (let i = 0; i < data.length; ++i) {
+        for (let i = data.length - 1; i > -1; --i) {
             var $insertIten = $('<tr></tr>')
                 .append('<th scope="row">' + data[i]._id + '</th>')
                 .append('<td>' + data[i].exercise.name + '</td>')
