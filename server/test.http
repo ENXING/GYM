@@ -1,0 +1,17 @@
+# @url = http://workoutreport.ga:10201/api/
+@url = http://localhost:10201/api
+@json=Content-Type: application/json
+
+### 
+get {{url}}/get-history
+
+
+### 
+post {{url}}/test
+{{json}}
+
+{
+    "username": "enxing",
+    "passwd": "1234"
+}
+

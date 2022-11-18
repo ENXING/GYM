@@ -38,7 +38,10 @@ const app = express();
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-app.post('/del-item', urlencodedParser, (request, response) => {
+
+app.use(express.json())
+
+app.post('/api/del-item', urlencodedParser, (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
     let str = JSON.stringify(request.body);
@@ -49,7 +52,14 @@ app.post('/del-item', urlencodedParser, (request, response) => {
 	})
 });
 
-app.post('/put-workout', urlencodedParser, (request, response) => {
+app.post('/api/test', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+	console.log(req)
+	res.send("test!")
+}) 
+
+app.post('/api/put-workout', urlencodedParser, (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
     let str = JSON.stringify(request.body);
@@ -58,7 +68,7 @@ app.post('/put-workout', urlencodedParser, (request, response) => {
 });
 
 
-app.get('/get-history', (request, response)=>{
+app.get('/api/get-history', (request, response)=>{
 	response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
 
@@ -72,7 +82,7 @@ app.get('/get-history', (request, response)=>{
 });
 
 
-app.all('/jsonp-server', (request, response)=>{
+app.all('/api/jsonp-server', (request, response)=>{
 	response.setHeader('Access-Control-Allow-Origin', '*');
     response.setHeader('Access-Control-Allow-Headers', '*');
 	let x =[] 
@@ -86,7 +96,7 @@ app.all('/jsonp-server', (request, response)=>{
 	response.send(str);
 });
 
-app.get('/server', (request, response) => {
+app.get('/api/server', (request, response) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.send('HELLO AJAX - 2 express');
 });
