@@ -1,3 +1,7 @@
+// var ip = '43.226.26.53'
+var ip = 'workoutreport.ga'
+// var ip = 'localhost'
+
 let present = $('#inputdata')
 $('#history_data').click(e=>{
     if(!event.detail || event.detail == 1){
@@ -21,9 +25,6 @@ $('#graph').click(e => {
         present.show()
     }
 });
-
-var ip = '43.226.26.53'
-// var ip = 'localhost'
 
 
 var canvas = document.getElementById("myChart");

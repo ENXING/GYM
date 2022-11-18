@@ -3,7 +3,7 @@ $('#submit').click(function(e){
     let workout_name = $('#workout_name :selected').text()
     if (!confirm('Confirm ' + workout_name + '?')) return;
     const xhr = new XMLHttpRequest();
-    let url = 'http://' + ip + ':10201/put-workout'
+    let url = 'https://' + ip + '/api/put-workout'
     xhr.open('POST', url, true);
     // xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
