@@ -1,5 +1,5 @@
 // var ip = '43.226.26.53'
-var ip = 'workoutreport.ga'
+var ip = 'workout.enxing.cf'
 // var ip = 'localhost'
 
 let present = $('#inputdata')
