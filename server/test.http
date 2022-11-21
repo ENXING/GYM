@@ -5,13 +5,29 @@
 ### 
 get {{url}}/get-history
 
-
 ### 
-post {{url}}/test
+get {{url}}/profile
+Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzN2JlY2VmMDQ4N2ZjYzZkOWM3YjI4ZiIsImlhdCI6MTY2OTA3MjExNSwiZXhwIjoxNjY5MDcyMTM1fQ.lI-bNehhJjaMM6T05yOuDFuPTYeUwWbrugeQNqZA_Rc
+
+###
+post {{url}}/login
 {{json}}
 
 {
-    "username": "enxing",
-    "passwd": "1234"
+    "username": "enxing2",
+    "password": "1234"
 }
+
+###
+post {{url}}/register
+{{json}}
+
+{
+    "username": "enxing4",
+    "password": "1234"
+}
+
+
+###
+get {{url}}/users
 
