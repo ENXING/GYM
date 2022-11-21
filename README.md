@@ -1,5 +1,9 @@
 # GYM
 
+# Mongodb
+## Update
+* db.workouts.update({}, {$set:{"deleted":false}}, false, true)
+* db.workouts.deleteMany({deleted:true});
 ## Backup:
 * mongoexport -d exercise -c workouts -f _id,exercise.name,exercise._id,repeat,weight --type=csv -o workout.csv
 * mongoimport -d exercise -c workouts --type=csv --headerline --file=workout.csv
@@ -8,16 +12,13 @@
 * mongodump
 * mongorestore --db exercise ./dump/exercise
 
-## nodemon
+# nodemon
 * screen -ls
 * screen -S myname
 * screen -S myname -X quit
 * screen -r myname
 * ctrl+a d: detach
 
-# Mongodb
-* db.workouts.update({}, {$set:{"deleted":false}}, false, true)
-* db.workouts.deleteMany({deleted:true});
 
 
 # nginx:
@@ -58,7 +59,7 @@ location /foo {
 }
 Notice the additional / at the end of the proxy_pass directive. NGINX will strip the matched prefix /foo and pass the remainder to the backend server at the URI /. Therefore, http://myserver:80/foo/bar will post to the backend at http://localhost:3200/bar.
 ```
-
+* /etc/nginx/sites-available
 * apache
     * /var/log/apache2/access.log
     * watch tail cat /var/log/apache2/access.log

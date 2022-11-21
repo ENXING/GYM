@@ -1,6 +1,7 @@
 // var ip = '43.226.26.53'
-var ip = 'workout.enxing.cf'
-// var ip = 'localhost'
+// var ip = 'workout.enxing.cf'
+var ip = 'localhost:10201'
+var protocol = 'http'
 
 let present = $('#inputdata')
 $('#history_data').click(e=>{

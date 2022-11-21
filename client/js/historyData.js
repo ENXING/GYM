@@ -5,7 +5,7 @@ function clickDelete() {
     if (confirm('Confirm ' + name + '?')) {
         let id = $(this).parent().siblings('th').text();
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://' + ip + '/api/del-item');
+        xhr.open('POST', protocol +'://' + ip + '/api/del-item');
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.send('id='+id)
         xhr.onreadystatechange = function () {
@@ -22,7 +22,7 @@ function clickDelete() {
 
 function getAll(resovle, reject) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://' + ip + '/api/get-history');
+    xhr.open('GET', protocol+ '://' + ip + '/api/get-history');
     xhr.send()
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4){

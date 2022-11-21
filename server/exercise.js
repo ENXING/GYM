@@ -8,6 +8,7 @@ const actionNameSchema = new mongoose.Schema({
     photo: String
 })
 
+
 const workoutSchema = new mongoose.Schema({
     exercise: {
         type: actionNameSchema,
@@ -34,7 +35,23 @@ const workoutSchema = new mongoose.Schema({
     }
 
 })
+const UserSchema = new mongoose.Schema({
+    username: {type: String, unique: true},
+    password: {
+        type: String,
+        set(val) {
+            return require('bcrypt').hashSync(val, 10);
+        }
+    },
+    workout: [ workoutSchema ]
+})
+
+
+const User = mongoose.model('User', UserSchema);
+const ActionName = mongoose.model("Action_Name", actionNameSchema);
+const Workout = mongoose.model("Workout", workoutSchema);
 module.exports = {
-    Workout: mongoose.model("Workout", workoutSchema),
-    ActionName: mongoose.model("Action_Name", actionNameSchema)
+    Workout,
+    ActionName,
+    User
 }
