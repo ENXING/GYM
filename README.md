@@ -4,9 +4,23 @@
 ## Update
 * db.workouts.update({}, {$set:{"deleted":false}}, false, true)
 * db.workouts.deleteMany({deleted:true});
+*  
+```mongodb
+db.workouts.find({}, {_id: 1}).forEach(
+  function(i) {
+    db.users.updateOne(
+      {name: "EnxingXiong"}, 
+      {$push: {"workout": i._id} }
+    );
+    }
+  );
+```
+
 ## Backup:
 * mongoexport -d exercise -c workouts -f _id,exercise.name,exercise._id,repeat,weight --type=csv -o workout.csv
 * mongoimport -d exercise -c workouts --type=csv --headerline --file=workout.csv
+
+
 
 ## Restore
 * mongodump
@@ -70,3 +84,11 @@ iptables -A INPUT -p tcp -s localhost --dport 10201 -j ACCEPT
 iptables -A INPUT -p tcp --dport 10201  -j DROP
 ```
 
+## build env
+* create config.js in "server" folder with "server.js"
+  * 
+  ```
+  module.exports = {
+    jwtSecretKey: "123456"
+  }
+  ```
