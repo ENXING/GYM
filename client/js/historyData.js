@@ -1,37 +1,49 @@
+
 $('#exercieseTable').delegate('a', 'click', clickDelete)
+const token = sessionStorage.getItem("token");
 function clickDelete() {
     var $tr = $(this).parent().parent()
     var name = $tr.children(':first').html()
     if (confirm('Confirm ' + name + '?')) {
         let id = $(this).parent().siblings('th').text();
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', protocol +'://' + ip + '/api/del-item');
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.send('id='+id)
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status >= 200 && xhr.status < 300) {
+        $.post(
+            {
+                url: `${url}/del-item`,
+                headers: {'Content-type': 'application/x-www-form-urlencoded'},
+                data: json2url({
+                    "token": token,
+                    'id': id
+                }),
+                success: e => {
                     $tr.remove()
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    alert(`Status: ${textStatus}, Erro: ${errorThrown}`)
                 }
             }
-        }
-        // console.log($(this).parent().siblings('th').text())
+        )
     }
     return false
 }
 
 function getAll(resovle, reject) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', protocol+ '://' + ip + '/api/get-history');
-    xhr.send()
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4){
-            if(xhr.status >= 200 && xhr.status < 300){
-                let data = JSON.parse(xhr.response);
+    $.post(
+        {
+            url: `${url}/get-history`,
+            headers: {'Content-type': 'application/x-www-form-urlencoded'},
+            data: json2url({
+                "token": token
+            }),
+            success: e => {
+                let data = JSON.parse(e);
                 resovle(data)
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert(`Status: ${textStatus}, Erro: ${errorThrown}`)
+                reject(errorThrown)
             }
         }
-    }
+    )
 }
 
 function printHistory(resovle, reject) {
@@ -39,6 +51,7 @@ function printHistory(resovle, reject) {
     let p = new Promise(getAll)
     p.then((data)=>{
         for (let i = data.length - 1; i > -1; --i) {
+            if (data[i] === null) break;
             var $insertIten = $('<tr></tr>')
                 .append('<th scope="row">' + data[i]._id + '</th>')
                 .append('<td>' + data[i].exercise.name + '</td>')

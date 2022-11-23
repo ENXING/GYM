@@ -1,10 +1,6 @@
-// var ip = '43.226.26.53'
-// var ip = 'workout.enxing.cf'
-var ip = 'localhost:10201'
-var protocol = 'http'
-
 let present = $('#inputdata')
 $('#history_data').click(e=>{
+    checkedLogin();
     if(!event.detail || event.detail == 1){
         present.hide()
         present = $('#history_form')
@@ -13,12 +9,14 @@ $('#history_data').click(e=>{
     }
 });
 $('#record').click(e=>{
+    checkedLogin();
     present.hide()
     present = $('#inputdata')
     present.show()
 });
 
 $('#graph').click(e => {
+    checkedLogin();
     if(!event.detail || event.detail == 1){
         present.hide()
         present = $('#graph_form')
@@ -32,7 +30,6 @@ var canvas = document.getElementById("myChart");
 var dragging = false;
 var lastX;
 var marginLeft = 0;
-
 
 canvas.addEventListener('mousedown', function(e) {
     var evt = e || event;

@@ -1,6 +1,7 @@
 # @url = http://workoutreport.ga:10201/api/
 @url = http://localhost:10201/api
 @json=Content-Type: application/json
+@urlencoded=Content-Type: x-www-form-urlencoded
 
 ### 
 get {{url}}/get-history
@@ -14,9 +15,18 @@ post {{url}}/login
 {{json}}
 
 {
-    "username": "enxing2",
+    "username": "enxing4",
     "password": "1234"
 }
+
+
+
+###
+post {{url}}/login
+{{urlencoded}}
+
+username=enxing4&password=1234
+
 
 ###
 post {{url}}/register

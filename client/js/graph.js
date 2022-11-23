@@ -12,6 +12,7 @@ function showGraph(startDay) {
   let record = {}
   p.then((items)=>{
     for (let i = 0; i < items.length; ++i) {
+      if (items[i] === null) continue;
       let name = items[i].exercise.name;
       let color = colors[count]
       if (name in name2color) {
@@ -31,14 +32,8 @@ function showGraph(startDay) {
           weight: items[i].weight,
           repeat: items[i].repeat
         }]
-        // record[name] = {
-        //   [new Date(items[i].created).toLocaleDateString("en-US")]: [{
-        //   weight: items[i].weight,
-        //   repeat: items[i].repeat
-        //   }]
-        // }
+
       }
-      // let item = {label: name, backgroundColor: color, borderColor: color, data}
       console.log(new Date(items[i].created))
     }
     for (let label in record) {
@@ -65,7 +60,6 @@ function showGraph(startDay) {
     Window.myChart_ = new Chart( document.getElementById('myChart'), config);
   })
 };
-
 
 
 function getDatesInRange(startDate, endDate) {
