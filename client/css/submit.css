@@ -74,6 +74,12 @@
     .card-registration .select-arrow {
     top: 13px;
     }
-
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 80vh;
+        width: 80vw;
+      }
+      
 
 

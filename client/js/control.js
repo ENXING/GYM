@@ -20,7 +20,7 @@ $('#graph').click(e => {
     if(!event.detail || event.detail == 1){
         present.hide()
         present = $('#graph_form')
-        showGraph(new Date('2022-11-1'));
+        showGraph(new Date('2022-11-11'));
         present.show()
     }
 });

@@ -37,7 +37,7 @@ function showGraph(startDay) {
       console.log(new Date(items[i].created))
     }
     for (let label in record) {
-      let item = {label: label, backgroundColor: name2color[label], borderColor: name2color[label], data: Array(labels_x.length).fill()}
+      let item = {label: label, backgroundColor: name2color[label], borderColor: name2color[label], fill: false, tension: 0.1, data: Array(labels_x.length).fill()}
       for (let j = 0; j < labels_x.length; ++j) {
         let day = labels_x[j];
         if (day in record[label]) {
@@ -52,7 +52,7 @@ function showGraph(startDay) {
     const config = {
       type: 'line',
       data: data,
-      options: {}
+      options: {spanGaps: true}
     };
     if (Window.myChart_ !== undefined) {
       Window.myChart_.destroy();
