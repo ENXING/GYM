@@ -36,6 +36,11 @@ db.workouts.find({}, {_id: 1}).forEach(
 
 
 # nginx:
+## debug page:
+```
+    return 200 "document_root: $document_root, request_uri: $request_uri";
+
+```
 ## setting
 ```
 server {
